@@ -1,4 +1,4 @@
-param namePrefix string = 'stg01' // prefix for the storage account name
+param namePrefix string = 'stg02' // prefix for the storage account name
 param location string = resourceGroup().location // location of the storage account
 param hotAccessTier bool = true // boolean parameter to set access tier to Hot or Cool
 
@@ -13,7 +13,10 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   kind: 'StorageV2'
   properties: {
     accessTier: hotAccessTier ? 'Hot' : 'Cool' // set access tier based on the boolean parameter
+    allowBlobPublicAccess: false // disable public access to blobs
+    minimumTlsVersion: 'TLS1_2' // enforce minimum TLS version 1.2 for security
   }
+
 }
 output storageAccountName string = storageAccount.name // output the name of the created storage account
 output storageAccountEndpoint string = storageAccount.properties.primaryEndpoints.web // output the web endpoint of the storage account 
