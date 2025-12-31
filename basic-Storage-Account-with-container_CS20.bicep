@@ -36,8 +36,9 @@ resource blob 'Microsoft.Storage/storageAccounts/blobServices/containers@2019-06
   }
 ]
 
-output blob array = [for (blobContainer, i) in blobContainers: {
+output blobs array = [for (blobContainer, i) in blobContainers: {
   name: blobContainer[i].name
-  publicAccess: blobContainer.publicAccess
+    
 }]
+
 
