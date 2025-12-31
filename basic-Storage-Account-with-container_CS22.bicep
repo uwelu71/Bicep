@@ -25,3 +25,5 @@ resource blobDec 'Microsoft.Storage/storageAccounts/blobServices/containers@2019
 
 output stg string = stg.name 
 
+
+
