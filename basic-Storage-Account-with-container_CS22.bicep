@@ -1,6 +1,6 @@
 param namePrefix string = 'stg'
 param location string = 'eastus'
-param createContainer bool = true 
+param createContainer string = utcNow('MM')
 
 var storageAccountName = '${namePrefix}${uniqueString(resourceGroup().id)}' 
 
@@ -19,6 +19,9 @@ resource blobMay 'Microsoft.Storage/storageAccounts/blobServices/containers@2019
 resource blobJune 'Microsoft.Storage/storageAccounts/blobServices/containers@2019-06-01' = if (createContainer == '06') {
   name: '${stg.name}/default/june'
 }  
+resource blobDec 'Microsoft.Storage/storageAccounts/blobServices/containers@2019-06-01' = if (createContainer == '12') {
+  name: '${stg.name}/default/december'
+} 
 
 output stg string = stg.name 
 
