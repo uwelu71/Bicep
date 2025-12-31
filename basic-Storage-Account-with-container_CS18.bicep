@@ -1,10 +1,6 @@
 param namePrefix string = 'stg'
 param location string = 'eastus'
-
 param numberofContainers int = 5
- ]
-
-
 
 var storageAccountName = '${namePrefix}${uniqueString(resourceGroup().id)}'
 
@@ -29,8 +25,3 @@ resource blob 'Microsoft.Storage/storageAccounts/blobServices/containers@2019-06
 }]
 
 output stg string = stg.name
-
-output blobContainers array = [for blobContainerName in blobContainerNames: blobContainerName]
-output storageAccountEndpoint string = stg.properties.primaryEndpoints.blob
-output storageAccountLocation string = stg.location
-output storageAccountSku string = stg.sku.name
